@@ -1,19 +1,28 @@
-//
-//  ViewController.swift
-//  MyDaysApp
-//
-//  Created by Данила Братинов on 25.10.2022.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet var infoLabel: UILabel!
+    @IBOutlet var resultButton: UIButton!
+    
+    private var numberOfDays = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
-
-
+    
+    override func viewWillLayoutSubviews() {
+        resultButton.layer.cornerRadius = resultButton.layer.frame.width / 6
+    }
+    
+    @IBAction func datePciker(_ sender: UIDatePicker) {
+        let range = sender.date..<Date.now
+        numberOfDays = range.formatted(.components(style: .wide, fields: [.day]))
+    }
+    
+    @IBAction func resultButtonTapped() {
+        infoLabel.text = "Ты наслаждаешься жизнью уже \(numberOfDays)!"
+    }
+    
 }
 
